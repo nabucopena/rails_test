@@ -1,8 +1,6 @@
 <h1>Welcome</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 <div name="projects">
-  <% @projects.each do |project| %>
-    <p> <%= project.title %> </p>
-  <% end %>
+  <%= render "shared/projects" %>
 </div>
 
