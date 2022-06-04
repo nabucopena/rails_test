@@ -1,2 +1,27 @@
 <h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
+
+<p><strong> <%= @task.title %> </strong></p>
+<p> <%= @task.description %> </p>
+
+<p><strong> Task started: <%= @task.created_at %> </strong></p>
+<% unless @task.created_at == @task.updated_at %>
+    <p><strong> Updated: <%= @task.updated_at %> </strong></p>
+<% end %>
+
+<p><i> 
+    <% if @task.completed == true %>
+        Task is completed
+    <% else %>
+        Task is pending
+    <% end %>
+</i></p>
+
+<% unless @task.task_file.blank? %>
+    <p><%= link_to "Attachment", @task.task_file.to_s %></p>
+<% end %>
+
+<%= link_to "Edit", edit_project_task_path(@project.id, @task.id) %>
+<%= link_to "Back to project", project_path(@task.project_id) %>
+
+
+<%# button_to "Delete task", @task, method: :delete %>
