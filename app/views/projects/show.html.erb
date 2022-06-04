@@ -8,3 +8,7 @@
 
   <%= button_to "Destroy this project", @project, method: :delete %>
 </div>
+
+<h2> Tasks for project </h2>
+
+<%= link_to "Add a new task for this project", new_project_task_path(project_id: @project.id) %>

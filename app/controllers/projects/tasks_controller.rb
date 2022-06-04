@@ -1,5 +1,8 @@
-class TasksController < ApplicationController
+class Projects::TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :new, :edit, :create, :update, :destroy]
+
+
   def show
   end
 
@@ -12,10 +15,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-  
+    @task.project_id = @project.id
+
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was created successfully"}
+        format.html { redirect_to project_url(@task.project_id), notice: "Task was created successfully"}
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new}
@@ -27,7 +31,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was updated successfully"}
+        format.html { redirect_to project_url(@task.project_id), notice: "Task was updated successfully"}
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :edit}
@@ -36,18 +40,22 @@ class TasksController < ApplicationController
     end
   end
 
-def destroy
-  @task_destroy
-  respond_to do |format|
-    format.html { redirect_to_project_url(@task.project_id), notice: "Task was deleted successfully"}
-    format.json { head :no_content}
+  def destroy
+    @task_destroy
+    respond_to do |format|
+      format.html { redirect_to project_url(@task.project_id), notice: "Task was deleted successfully"}
+      format.json { head :no_content}
+    end
   end
-end
 
   private
 
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_project
+      @project = Project.find(params[:project_id])
     end
 
     def task_params

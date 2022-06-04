@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'tasks/show'
-  get 'tasks/new'
-  get 'tasks/edit'
 
   get "contact", to: "pages#contact"
   get "about", to: "pages#about"
@@ -9,7 +6,9 @@ Rails.application.routes.draw do
 
   get "code", to: redirect("https://github.com/nabucopena/rails_test")
   
-  resources :projects
+  resources :projects do
+    resources :tasks, except: [:index], controller: 'projects/tasks'
+  end
 
   root "pages#home"
 
