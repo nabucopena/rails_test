@@ -2,17 +2,19 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
-    get tasks_show_url
+    @task = Task.first
+    get project_task_url(@task.project, @task)
     assert_response :success
   end
 
   test "should get new" do
-    get tasks_new_url
+    get new_project_task_url(Project.first)
     assert_response :success
   end
 
   test "should get edit" do
-    get tasks_edit_url
+    @task = Task.first
+    get edit_project_task_url(@task.project, @task)
     assert_response :success
   end
 end

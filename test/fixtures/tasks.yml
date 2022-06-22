@@ -2,10 +2,10 @@
 
 one:
   title: MyString
-  descrption: MyText
+  description: MyText
   project: one
 
 two:
   title: MyString
-  descrption: MyText
+  description: MyText
   project: two
